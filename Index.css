@@ -1,5 +1,12 @@
 @charset "utf-8";
 
+
+
+#about nav .about > a {
+	pointer-events: none;
+	cursor: default;
+}
+
 nav{
     width: 100%;    /*横幅の指定*/
     border-top: 1px solid orange;   /*上部の線の色を指定*/
@@ -34,4 +41,8 @@ nav a:hover{
     background-color: orange;   /*背景色の指定*/
     color: #fff;    /*文字色の変更*/
     transition: 0.5s;   /*ホバー時の動きをなめらかにする*/
+}
+
+body{
+    background-color:#fff
 }
