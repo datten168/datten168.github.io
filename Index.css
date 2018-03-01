@@ -2,9 +2,11 @@
 
 
 
-#about nav .TOP > a {
+#TOP nav .TOP > a {
 	pointer-events: none;
-	cursor: default;
+    cursor: default;
+    background-color: orange;
+    color: #fff; 
 }
 
 nav{
