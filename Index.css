@@ -1,14 +1,5 @@
 @charset "utf-8";
 
-
-
-#TOP nav .TOP > a {
-	pointer-events: none;
-    cursor: default;
-    background-color: orange;
-    color: #fff; 
-}
-
 nav{
     width: 100%;    /*横幅の指定*/
     border-top: 1px solid orange;   /*上部の線の色を指定*/
@@ -45,6 +36,15 @@ nav a:hover{
     transition: 0.5s;   /*ホバー時の動きをなめらかにする*/
 }
 
+#MENU nav .TOP > a { /*現在位置のリンクの設定*/
+	pointer-events: none;
+    cursor: default;
+    background-color: orange;
+    color: #fff; 
+}
+
+
 body{
     background-color:#fff
 }
+
