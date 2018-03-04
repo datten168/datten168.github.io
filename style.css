@@ -4,6 +4,7 @@ html{
     font-family: arial, sans-serif;
 }
 
+
 nav{
     width: 100%;    /*横幅の指定*/
     background-color: #313131;    
@@ -38,7 +39,7 @@ nav a{
     line-height: 45px;  /*行間の指定（ナビボタンの高さ指定）*/
 }
 nav a:hover{
-    background-color: #fff;   /*背景色の指定*/
+    background-color: skyblue;   /*背景色の指定*/
     color: #313131;  /*文字色の変更*/
     transition: 0.5s;   /*ホバー時の動きをなめらかにする*/
 }
@@ -46,12 +47,13 @@ nav a:hover{
 #MENU nav .NOW > a { /*現在位置のリンクの設定*/
 	pointer-events: none;
     cursor: default;
-    background-color: #fff;
+    background-color: skyblue;
     color: #313131;
 }
 
 body{
     background-color:#fff;
+    background-image: linear-gradient(-90deg, #85A333, #0DB0C9);
 }
 
 h1{
@@ -63,6 +65,13 @@ h1{
     background: transparent;/*背景透明に*/
     border-left: solid 5px #7db4e6;/*左線*/
 }
+
+.text-area {
+    margin: 15px auto;
+    padding: 10px 5px 2px;
+    width: 60%;
+    background-color: rgba(255,255,255,0.5);
+   }
 
 p{
     font-size: 110%;
