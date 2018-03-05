@@ -1,0 +1,22 @@
+@charset "utf-8";
+
+html{
+    font-family: arial, sans-serif;
+}
+h1{
+    font-size: 150%;
+    margin-left: 2%;/*左へずらす*/
+
+    padding: 0.25em 0.5em;/*上下 左右の余白*/
+    color: #494949;/*文字色*/
+    background: transparent;/*背景透明に*/
+    
+}
+
+
+p{
+    font-size: 110%;
+    margin-left: 4%;
+    color: #494949;/*文字色*/
+}
+

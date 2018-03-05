@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html leng="ja">
+<head>
+    <meta charset="utf-8"/>
+    <link href="reset.css" rel="stylesheet" type="text/css">
+    <link href="test.css" rel="stylesheet" type="text/css">
+    <title>prg</title>
+    <script>
+        var num;
+        var ans;
+        var max;
+        var cnt;
+        var flag=0;
+        var text;
+
+
+        function init(){
+            cnt=0;
+            max=0;
+            max=document.getElementById("MAX").value;
+
+            //数字以外の入力が来た場合
+            if(isFinite(max)!=true||max==0){
+                alert("数字を入力してください。");
+                return -1;
+            }
+            //一度のみ入力を受け付ける
+            if(flag==0){
+            flag=1;
+            max=Number(max);
+            document.getElementById("max_box").innerHTML="最大値は"+max+"です。";
+            max++;
+            num=Math.floor(Math.random()*max); //ランダムに数字を決定
+            num=Number(num);
+            
+            return 1;
+            }
+            if(flag==1){
+                alert("最大値はすでに入力されています。");
+                return -1;
+            }
+        }
+
+        function check_ans(){
+            if(isFinite(max)!=true||max==0){
+                alert("先に最大値を決めてください");
+                return -1;
+            }
+            
+            ans=document.getElementById("ANS").value;
+
+            if(num<ans){
+                cnt++;
+                document.getElementById("ans_box").innerHTML="答えは"+ans+"より小さい値です。";
+            }
+            if(num>ans){
+                cnt++;
+                document.getElementById("ans_box").innerHTML="答えは"+ans+"より大きい値です。";
+            }
+            if(num==ans){
+                cnt++;
+                document.getElementById("ans_box").innerHTML="正解です！<br>正解までの回答数は"+cnt+"でした。";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>~数字当てゲーム~</h1>
+    <p>
+        このプログラムは以前C言語で作成したcgiをjavascriptに移植したものです。
+        <br>
+        遊び方は上のテキストボックスに最大値を入力すると、0から最大値までの範囲でランダムに数字が決まるので
+        解答すると得られるヒントをもとに決められた数字を見つけてください。<br><br>
+    
+    <form name="get_max_form" action="test.html">
+        最大値の入力<br>
+        <input type="text" name="textbox" id="MAX">
+        <input type="button" value="決定" onclick="init()">
+    </form> 
+    <span id="max_box"></span>
+    <br>答えの入力<br>
+    <form name="get_ans_form" action="test.html">
+        <input type="text" name="textbox" id="ANS">
+        <input type="button" value="解答" onclick="check_ans()">
+    </form>
+        <span id="ans_box"></span>
+    </p>
+    </body>    
+
+
+</html>

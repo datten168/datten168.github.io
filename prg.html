@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html leng="ja">
+<head>
+    <meta charset="utf-8"/>
+    <title>prg</title>
+
+
+
+    <script>
+        
+        heigh=9; //縦
+        width=9; //横
+        mine=10; //地雷数
+        map=new Array(81);  
+        open_map=new Array(81); //空いている場所 1なら空いている
+       // map_image=new Array(81);
+        open_mapx = new Array(100);
+        open_mapy = new Array(100);
+        game_flag=0;
+
+
+
+       function init(){
+            //配列の初期化
+           for(var i=0;i<width*heigh;i++){
+                open_map[i]=0;
+                map[i]=0;
+                document.images[i].src="block.png";
+           }
+
+
+            //地雷の設置
+            var cnt=0;
+            var tmp
+            while(1){
+                tmp=Math.floor(Math.random()*80);
+                
+                if(map[tmp]==0){
+                map[tmp]=1;
+                cnt++;
+                }
+
+                if(cnt==mine){
+                    break;
+                }
+            }
+
+
+        }
+
+        function put(x,y){
+            var rest=0;
+            pls = y*9+x;
+
+            if(open_map[pls]==1){
+                return;
+            }
+            map_open(x,y);
+            
+            if(map[pls]==1){
+                alert("game over");
+                game_flag=1;
+                return;
+            }
+            
+            for(var i=0;heigh*width;i++){
+                if(open_map[i]==0){
+                    rest++;
+                }
+            }
+            if(mine==rest){
+                game_flag=2;
+                alert("game clear");
+            }
+
+        }
+
+        function map_open(x,y){
+            open_cnt  = 0;
+            open_cnt2 = 1;
+            open_mapx[0] = x;
+            open_mapy[0] = y;
+
+            pls = y*10+x;
+            open_map[pls] = 1;
+            img = map[pls]+".png";
+            document.images[pls].src = img;
+
+            if( map[pls] == 0 ) {
+                open_map2();
+            }
+        }
+
+        function open_map2(x,y)	// 取る2
+{
+	while( 1 ) {
+		loop = open_cnt;
+		open_cnt = open_cnt2;
+	 	for( i=loop; i<open_cnt;i++ ) {
+			if( open_mapx[i] > 0 ) {	// 左をチェック
+				check( open_mapx[i]-1,open_mapy[i] );
+			}
+			if( open_mapx[i] < 9 ) {	// 右をチェック
+				check( open_mapx[i]+1,open_mapy[i] );
+			}
+			if( open_mapy[i] > 0 ) {	// 上をチェック
+				check( open_mapx[i],open_mapy[i]-1 );
+			}
+			if( open_mapy[i] < 9 ) {	// 下をチェック
+				check( open_mapx[i],open_mapy[i]+1 );
+			}
+		}
+		if( open_cnt == open_cnt2 ) break;
+	}
+}
+
+function check(x,y)	// チェックする
+{
+	pls = y*10+x;
+	if( open_map[pls] == 1 ) return;
+
+	if( map[pls] == 0 ) {	// ０の時
+		open_mapx[open_cnt2]=x;
+		open_mapy[open_cnt2]=y;
+		open_cnt2++;			// 取るところを増やす
+	}
+
+	// ０以外の時も開く。
+	if( map[pls] != 1 ) {
+		open_map[pls] = 1;
+		wdata = map[pls]+".png";
+		document.images[pls].src = wdata;
+	}
+}
+
+
+// 何個回りにあるか
+function get_cnt(x,y) {
+	tmp_cnt = 0;
+	if( x > 0 ) {	// 左をチェック
+		pls = y * 10 + ( x - 1 );
+		if( map[pls] == 1 ) tmp_cnt++;
+		if( y > 0 ) {	// 上をチェック
+			pls = ( y - 1 ) * 10 + x - 1;
+			if( map[pls] == 1 ) tmp_cnt++;
+		}
+		if( y < 9 ) {	// 下をチェック
+			pls = ( y + 1 ) * 10 + x - 1;
+			if( map[pls] == 1 ) tmp_cnt++;
+		}
+	}
+	if( x < 9 ) {	// 右をチェック
+		pls = y * 10 + ( x + 1 );
+		if( map[pls] == 1 ) tmp_cnt++;
+		if( y > 0 ) {	// 上をチェック
+			pls = ( y - 1 ) * 10 + x + 1;
+			if( map[pls] == 1 ) tmp_cnt++;
+		}
+		if( y < 9 ) {	// 下をチェック
+			pls = ( y + 1 ) * 10 + x + 1;
+			if( map[pls] == 1 ) tmp_cnt++;
+		}
+	}
+	if( y > 0 ) {	// 上をチェック
+		pls = ( y - 1 ) * 10 + x;
+		if( map[pls] == 1 ) tmp_cnt++;
+	}
+	if( y < 9 ) {	// 下をチェック
+		pls = ( y + 1 ) * 10 + x;
+		if( map[pls] == 1 ) tmp_cnt++;
+	}
+
+	return( tmp_cnt );
+}
+
+
+    </script>
+    </head>
+<body onload=init()>
+        <font size=7 color=#ff4466>
+                マインスイーパー</font><font size=5 color=#ffffff>for JavaScript</font>
+                <hr>
+                
+                <!--- ゲームの枠 -->
+                <table border=2><tr><td>
+                <script language="JavaScript">
+                //<!--
+                for(i=0;i<10;i++) {
+                    for(j=0;j<10;j++) {
+                        document.write('<a href=JavaScript:put(',j,',',i,')><img src=block.png border=0 width=32 height=32></a>');
+                    }
+                    document.write("<br>\n");
+                }
+                // -->
+                </script>
+                </td></tr></table>
+                
+                <form name=ms>
+                <input type = button value="マップ初期化" onClick="init_map()">
+                </form>
+                
+                <br>
+</body>
+</html>
